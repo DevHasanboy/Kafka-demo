@@ -10,13 +10,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaConsumer {
 
+
+
     private final CardService cardService;
 
     public KafkaConsumer(@Lazy CardService cardService) {
         this.cardService = cardService;
     }
 
-    @KafkaListener(topics = "dev", groupId = "my-groups")
+    @KafkaListener(topics ="${KAFKA_TOPIC_NAME:kafka-topic}", groupId = "my-groups")
     public void consume(String message) {
         System.out.println("recieved message: " + message);
     }
